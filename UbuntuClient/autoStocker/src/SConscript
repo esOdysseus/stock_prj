@@ -1,0 +1,87 @@
+#******************************************************************
+#
+# Copyright 2014 Intel Mobile Communications GmbH All Rights Reserved.
+#
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+thread_env = SConscript('#build_common/thread.scons')
+samples_env = thread_env.Clone()
+target_os = samples_env.get('TARGET_OS')
+home_dir = samples_env.get('SRC_DIR')
+
+iothead_dir = home_dir + '/inc/iotivity'
+iotlib_dir = home_dir + '/lib/iotivity'
+print 'iotivity Header dir = ' , iothead_dir
+print 'iotivity Library dir = ' , iotlib_dir
+
+######################################################################
+# Build flags
+######################################################################
+with_upstream_libcoap = samples_env.get('WITH_UPSTREAM_LIBCOAP')
+if with_upstream_libcoap == '1':
+	# For bring up purposes only, we manually copy the forked version to where the unforked version is downloaded.
+	samples_env.AppendUnique(CPPPATH = ['#extlibs/libcoap/libcoap/include'])
+else:
+	# For bring up purposes only, the forked version will live here.
+	samples_env.AppendUnique(CPPPATH = [iothead_dir + '/connectivity/lib/libcoap-4.1.1/include'])
+
+samples_env.PrependUnique(CPPPATH = [
+                home_dir + '/inc',
+		iothead_dir + '/c_common',
+		iothead_dir + '/c_common/oic_malloc/include',
+		iothead_dir + '/logger/include',
+		iothead_dir + '/stack/include',
+		iothead_dir + '/security/include',
+		iothead_dir + '/extlibs/cjson',
+		iothead_dir + '/extlibs/boost/boost',
+		iothead_dir + '/oc_logger/include',
+		])
+
+samples_env.AppendUnique(CPPDEFINES = ['IP_ADAPTER','NO_EDR_ADAPTER','NO_LE_ADAPTER','ROUTING_EP','WITH_BWT','TB_LOG'])
+
+compiler = samples_env.get('CXX')
+if 'g++' in compiler:
+	samples_env.AppendUnique(CXXFLAGS = ['-std=c++0x', '-Wall'])
+
+samples_env.AppendUnique(RPATH = [iotlib_dir])
+samples_env.AppendUnique(LIBPATH = [iotlib_dir])
+
+samples_env.PrependUnique(LIBS = ['logger', 'octbstack', 'ocsrm', 'connectivity_abstraction', 'coap'])
+
+if target_os not in ['arduino', 'windows', 'darwin', 'ios', 'msys_nt']:
+	samples_env.AppendUnique(LIBS = ['rt'])
+
+if target_os not in ['windows']:
+	samples_env.PrependUnique(LIBS = ['m'])
+
+if samples_env.get('SECURED') == '1':
+    samples_env.AppendUnique(LIBS = ['tinydtls'])
+
+samples_env.AppendUnique(CPPDEFINES = ['TB_LOG'])
+
+######################################################################
+# Source files and Targets
+######################################################################
+
+occlient         = samples_env.Program('occlient', ['occlient.cpp', 'common.cpp'])
+
+
+Alias("samples", occlient)
+
+samples_env.AppendTarget('samples')
+
+

@@ -1,0 +1,18 @@
+﻿  XingAPITest.cpp
+c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\xingapitest.cpp(57): warning C4477: 'printf' : format string '%X' requires an argument of type 'unsigned int', but variadic argument 2 has type 'HWND'
+c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\xingapitest.cpp(57): warning C4313: 'printf': '%X' in format string conflicts with argument 2 of type 'HWND'
+c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\xingapitest.cpp(187): warning C4065: switch statement contains 'default' but no 'case' labels
+  stdafx.cpp
+  EScommon.cpp
+c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\escommon.cpp(15): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'std::size_t'
+  c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\escommon.cpp(15): note: consider using '%zd' in the format string
+c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\escommon.cpp(106): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  CStockMain.cpp
+c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\cstockmain.cpp(126): warning C4800: 'BOOL': forcing value to bool 'true' or 'false' (performance warning)
+c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\cstockmain.cpp(221): warning C4002: too many actual parameters for macro 'ESLOG_S'
+c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\cstockmain.cpp(221): warning C4473: 'printf' : not enough arguments passed for format string
+  c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\cstockmain.cpp(221): note: placeholders and their parameters expect 3 variadic arguments, but 1 were provided
+  c:\users\eunseok\documents\visual studio 2015\projects\xingapitest\xingapitest\cstockmain.cpp(221): note: the missing variadic argument 2 is required by format string '%s'
+  Generating Code...
+  XingAPITest.vcxproj -> C:\Users\eunseok\documents\visual studio 2015\Projects\XingAPITest\x64\Debug\XingAPITest.exe
+  XingAPITest.vcxproj -> C:\Users\eunseok\documents\visual studio 2015\Projects\XingAPITest\x64\Debug\XingAPITest.pdb (Full PDB)

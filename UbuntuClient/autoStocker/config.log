@@ -1,0 +1,43 @@
+file /home/eunseok/project_2016/src/Gaia/autoStocker/build_common/SConscript,line 448:
+	Configure(confdir = .sconf_temp)
+scons: Configure: Checking for POSIX Thread Support...
+scons: Configure: ".sconf_temp/conftest_0.c" is up to date.
+scons: Configure: The original builder output was:
+  |.sconf_temp/conftest_0.c <-
+  |  |
+  |  |#if !defined(__GNUC__)
+  |  |#  error "Not the GCC C compiler."
+  |  |#endif
+  |  |
+  |  |int foo(void)
+  |  |{
+  |  |    return 0;
+  |  |}
+  |  |
+  |
+scons: Configure: ".sconf_temp/conftest_0.o" is up to date.
+scons: Configure: The original builder output was:
+  |gcc -o .sconf_temp/conftest_0.o -c -std=gnu99 -g -Wall -Wextra -fPIC -m64 -DTB_LOG -DWITH_POSIX -D__linux__ .sconf_temp/conftest_0.c
+  |
+scons: Configure: ".sconf_temp/conftest_1.c" is up to date.
+scons: Configure: The original builder output was:
+  |.sconf_temp/conftest_1.c <-
+  |  |
+  |  |#include <unistd.h>
+  |  |#include <pthread.h>
+  |  |int main()
+  |  |{
+  |  |    #ifndef _POSIX_THREADS
+  |  |    # error POSIX Threads support not available
+  |  |    #endif
+  |  |    return 0;
+  |  |}
+  |  |
+  |
+scons: Configure: ".sconf_temp/conftest_1.o" is up to date.
+scons: Configure: The original builder output was:
+  |gcc -o .sconf_temp/conftest_1.o -c -std=gnu99 -g -Wall -Wextra -fPIC -m64 -DTB_LOG -DWITH_POSIX -D__linux__ .sconf_temp/conftest_1.c
+  |
+scons: Configure: (cached) yes
+
+
